@@ -8,16 +8,12 @@ module Cpu
       result = game.result
       
       if result
-        # game is over#
+        # game is over
         return game.cpu_score
       else
-        if game.turn == "X"
-          state_score = -1000
-        elsif game.turn == "O"
-          state_score = 1000
-        end
+        state_score = -1000
         
-        # Get all possible actions
+        # Get all possible actions and their scores
         actions = []
         game.empty_spaces.each do |e|
           action = Cpu::Action.new(e)
@@ -27,11 +23,7 @@ module Cpu
         end
 
         actions.each do |a|
-          if game.turn == "X"
-            state_score = a.score if a.score > state_score
-          else
-            state_score = a.score if a.score < state_score
-          end
+          state_score = a.score if a.score > state_score
         end
         return state_score
       end

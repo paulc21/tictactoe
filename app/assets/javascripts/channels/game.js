@@ -2,7 +2,7 @@ $(document).ready(function(){
   App.game = App.cable.subscriptions.create({
     channel: "GameChannel",
     id: $('#game-grid').attr('data-game-id')
-    },{
+  },{
     connected: function(){},
     disconnected: function(){},
     received: function(data){
