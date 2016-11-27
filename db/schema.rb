@@ -14,10 +14,10 @@ ActiveRecord::Schema.define(version: 20161127113921) do
 
   create_table "games", force: :cascade do |t|
     t.string   "state"
-    t.integer  "x_player_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["x_player_id"], name: "index_games_on_x_player_id"
+    t.string   "x_player"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["x_player"], name: "index_games_on_x_player"
   end
 
 end

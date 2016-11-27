@@ -32,21 +32,21 @@ class Game < ApplicationRecord
   def result
     s = self.state
 
-    # rows
+    # Check rows
     [0,3,6].each do |r|
       if !s[r].blank? && (s[r] == s[r+1] && s[r] == s[r+2])
         return s[r]
       end
     end
 
-    # columns
+    # Check columns
     [0,1,2].each do |c|
       if !s[c].blank? && (s[c] == s[c+3] && s[c] == s[c+6])
         return s[c]
       end
     end
 
-    # diagonals
+    # Check diagonals
     if !s[0].blank? && (s[0] == s[4] && s[0] == s[8])
       return s[0]
     end
