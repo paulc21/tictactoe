@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
   def new
     unless cookies.signed[:username].blank?
-      # we've already signed in
+      flash[:success] = "You've signed in"
       redirect_to games_path and return
     end
   end

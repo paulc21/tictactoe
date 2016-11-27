@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+td.game-cell{
+  border: 1px solid #CCC;
+  width:150px;
+  height:150px;
+}

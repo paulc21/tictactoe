@@ -13,7 +13,7 @@ class Game < ApplicationRecord
       if new_state.count == 9
         self[:state] = new_state.join(",")
       else
-        throw "State must have 9 cells"
+        throw "State must have 9 cells -- #{new_state.join(",")}"
       end
     else
       throw "State must be an array"
@@ -29,6 +29,7 @@ class Game < ApplicationRecord
     end
   end
 
+  # Get the result of the game, or false if it is still ongoing
   def result
     s = self.state
 
@@ -60,6 +61,33 @@ class Game < ApplicationRecord
     end
 
     return false
+  end
+
+  # Make a move
+  def play(index,player=nil)
+    r = self.result
+    unless r
+      index = index.to_i
+
+      raise "Invalid player" unless %w(X O).include?(player)
+      raise "Not your turn" unless self.turn == player
+
+      s = self.state
+      if s[index].blank?
+        s[index] = player
+        self.state = s
+      else
+        raise "Space taken"
+      end
+    else
+      raise "Game over -- #{r}"
+    end
+  end
+
+  # Make a move and save
+  def play!(space,player=nil)
+    self.play(space,player)
+    self.save
   end
 
   def xes

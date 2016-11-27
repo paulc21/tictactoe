@@ -1,4 +1,5 @@
 App.game = App.cable.subscriptions.create "GameChannel",
+
   connected: ->
     # Called when the subscription is ready for use on the server
 
@@ -8,5 +9,9 @@ App.game = App.cable.subscriptions.create "GameChannel",
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
 
-  play: (data) ->
-    @perform 'play'
+  play: (cell) ->
+    @perform 'play', cell: cell
+
+
+  $(document).on 'click', '.game-cell', (event) ->
+    alert($(this).attr("id"))

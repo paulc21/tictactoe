@@ -9,6 +9,9 @@
   </head>
 
   <body>
+    <% flash.each do |type,msg| %>
+      <p><strong><%= type.humanize %>:</strong> <%= msg %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>

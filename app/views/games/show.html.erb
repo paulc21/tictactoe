@@ -1,0 +1,13 @@
+<% s = @game.state %>
+<% e = 0 %>
+<table>
+  <% (1..3).each do |r| %>
+    <tr>
+      <% (1..3).each do |c| %>
+        <%= render partial: "games/cell", locals: { xo: s[e], id: e } %>
+        <% e += 1 %>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
