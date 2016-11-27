@@ -2,6 +2,8 @@ class Game < ApplicationRecord
 
   before_create :blank_grid
 
+  after_save :broadcast_update
+
   # Return the state as an array
   def state
     self[:state].split(",")
@@ -101,5 +103,9 @@ class Game < ApplicationRecord
   private
   def blank_grid
     self.state = [" "," "," "," "," "," "," "," "," "]
+  end
+
+  def broadcast_update
+    ActionCable.server.broadcast(self,self)
   end
 end
