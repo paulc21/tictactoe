@@ -22,6 +22,27 @@ class Game < ApplicationRecord
     end
   end
 
+  # Return a list of array indices with empty cells
+  def empty_spaces
+    empty = []
+    self.state.each_with_index do |e,i|
+      empty.push(i) if e.blank?
+    end
+    return empty
+  end
+
+  def cpu_score
+    case self.result
+    when "O"
+      return 10 - xes
+    when "X"
+      return -10 + os
+    else
+      #draw or incomplete
+      return 0
+    end
+  end
+
   # Returns which player's turn it is
   def turn
     if xes > os
